@@ -30,16 +30,27 @@
                         <RegistryKey  Key="shell\open\command">
                             <RegistryValue  Type="string" Value="&quot;[DIR_MyProgram]Dog.exe&quot; &quot;%1&quot; "  />
                         </RegistryKey>
-                                      
-                                  
+                        <?ifdef env.REVISION?>
+                            <RegistryValue  Type="string"   Name="revision" Value="$(env.REVISION)">
+                        <?endif?>                                                                       
                     </RegistryKey>                  
                 </Component>
+            </DirectoryDef>
+            
+            <!--features-->
+            <Feature Id="FileToInstallFeature"  Title="Lyou DOG" ConfigurableDirectory="DIRMYPROGRAM" Level=1>
+                <ComponentRef Id="EXE_FileToInstall" />
+                <ComponentRef Id="DLL_DllToInstall"  />
+                <ComponentRef Id="DOG_reg" />
+            </Feature>    
+            <UI>
+                <UIRef Id="WixUI_Mondo">                        
+            </UI>    
+            
+            <SetProperty Id="WixShellExecTarget" Sequence="ui" Value="[ProgramFilesFolder]PLCMLauncher\Launcher.exe" Before="ExecuteAction" /> 
 
-
-
-
-
-
+		    <!--<Property Id="WixShellExecTarget" Value="[APPABSNAME]" />-->
+			<CustomAction Id="LaunchApplication"  BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />                                                       
     </Product>
 </Wix>
 

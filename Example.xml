@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product  Id="ONLYGUID1" Name="DOG" Language="1033" Version="1.0.0.$(env.REVISION)" Manufacturer="Lyou, Person."  UpgradeCode="ONLYGUID2">
+        <Package  Compressed="yes" InstallScope="perUser" InstallPrivileges="limited" Manufacturer="Lyou, Person."  Description="Example test"  Comments="2018 Lyou, Person" />
+            <MediaTemplate EmbedCab="yes">
+            
+            <!--Directory structure-->
+            <Directory Id="TARGETDIR" Name="SourceDir">
+                <Directory Id="DIR_MyProgram" Name="LyouOne">
+            </Directory>                        
+            <SetDirectory Id="DIR_MyProgram" Value="[LocalAppDataFolder]Lyou\DOG" Sequence="execute" />
+            
+            <!--Components-->
+            <DirectoryRef Id="DIR_MyProgram">
+                <Component  Id="EXE_FileToInstall"  Guid="ONLYGUID3">
+                    <File Id="DOG_exe"  Name="Dog.exe" Source="Dog.exe" KeyPath="yes" />            
+                </Component>
+                
+                <Component  Id="DLL_DllToInstall" Guid="ONLYGUID4">
+                    <File Id="GOD_dll"  Name="dog.dll"  Source="..\libs\dog.dll"  KeyPath="yes" />                                        
+                </Component>
+
+                <Component  Id="DOG_reg"  Guid="ONLYGUID5">
+                    <RegistryKey  Root="HKCR" Key="lyou"  ForceDeleteOnUninstall="yes">
+                        <RegistryValue  Type="string" Name="URL Protocol" Value="" />
+                        <RegistryValue  Type="string" Value="URL:plcmlauncher" />
+                        <RegistryKey  Key="DefaultIcon">
+                            <RegistryValue  Type="string" Value="Dog.exe" />
+                        </RegistryKey>
+                        <RegistryKey  Key="shell\open\command">
+                            <RegistryValue  Type="string" Value="&quot;[DIR_MyProgram]Dog.exe&quot; &quot;%1&quot; "  />
+                        </RegistryKey>
+                                      
+                                  
+                    </RegistryKey>                  
+                </Component>
+
+
+
+
+
+
+    </Product>
+</Wix>
+
+
+
+
+
+

@@ -1,0 +1,17 @@
+candle.exe Sample.wxs   -->   Sample.wixobj   (like a complier)
+light.exe Sample.wixobj   -->   Sample.msi    (like a linker)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

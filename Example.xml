@@ -48,9 +48,8 @@
             </UI>    
             
             <SetProperty Id="WixShellExecTarget" Sequence="ui" Value="[ProgramFilesFolder]PLCMLauncher\Launcher.exe" Before="ExecuteAction" /> 
-
-		    <!--<Property Id="WixShellExecTarget" Value="[APPABSNAME]" />-->
-			<CustomAction Id="LaunchApplication"  BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />                                                       
+	    <!--<Property Id="WixShellExecTarget" Value="[APPABSNAME]" />-->
+	    <CustomAction Id="LaunchApplication"  BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />                                                       
     </Product>
 </Wix>
 

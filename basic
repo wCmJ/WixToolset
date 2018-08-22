@@ -1,7 +1,19 @@
 candle.exe Sample.wxs   -->   Sample.wixobj   (like a complier)
 light.exe Sample.wixobj   -->   Sample.msi    (like a linker)
-
-
+basic structure:
+<Wix>
+    <Product>
+        <Package>
+            <MediaTemplate>
+            <Directory Id="TARGETDIR" Name="SourceDir">
+            <Icon Id="L.ico" SourceFile="Launcher.exe" />
+            <DirectoryRef>
+                <Component>
+                    <File>
+                <Component>
+                    <RegistryKey>
+            <Feature>
+                <ComponentRef>
 
 
 

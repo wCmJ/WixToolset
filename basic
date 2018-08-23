@@ -25,10 +25,19 @@ the library includes all standard wizard pages: license agreement,
                                                 modify/repair/remove and rollback.
 
 
-
-
-
-
+WixUI_Mondo:    
+            complete interface, welcome page, license agreement, setup type(typical, custom and complete),
+            allows for feature customization, browsing for the target directory and offers disk costing, maintenance mode dialog
+WixUI_FeatureTree:
+            similar to the full set but it doesnot allow the user to chose between setup types.
+            it always assumes Custom and goes directly to the feature customization dialog after the user has accepted the license agreement.
+WixUI_InstallDir: <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR">
+            allows the user to select a destination directory but without presenting the usual customized features page
+WixUI_Minimal:
+            license agreement pages
+WixUI_Advanced:
+            similar to WixUI_Minimal, it also allows selecting features and folders if the user chooses to do so
+            
 
 
 

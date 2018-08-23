@@ -16,8 +16,13 @@ basic structure:
                 <ComponentRef>
 
 
-
-
+WixUI
+the library includes all standard wizard pages: license agreement, 
+                                                customer information, 
+                                                typical/custom/complete setup types,
+                                                customization of install target folder,
+                                                calculation of disk usage requirements,
+                                                modify/repair/remove and rollback.
 
 
 

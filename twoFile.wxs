@@ -1,0 +1,101 @@
+--------------------------------------------------------------------------one
+<?xml version="1.0" encoding="utf-8" ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="8A5CB21E-2DE7-4DA8-A991-6FBD9BA2FC01" UpgradeCode="B1BEC438-7FF0-4441-AD81-F032BECD12FF" Name="First Program" Manufacturer="person" Language="1033" Codepage="1252" Version="1.0.0" >
+		<Package Id="*" />
+		<Media Id="1" />
+			<Directory Id="TARGETDIR" Name="SourceDir">
+					<Directory	Id="INSTALLDIR" Name="lyou" >						
+					</Directory>				
+			</Directory>
+			<SetDirectory Id="INSTALLDIR" Value="[LocalAppDataFolder]\lyou" Sequence="execute" />
+			<DirectoryRef Id="INSTALLDIR" >
+				<Component Id="Executable" Guid="30329BFB-5C23-472C-B485-8D8234ABDC0B">
+							<File Id="Second" Name="Second.exe" Source="Second.exe" KeyPath="yes"/>
+						</Component>
+						<Component Id="Registry" Guid="89C3617C-DECA-4333-805F-80A84C6F491C">
+							<RegistryKey Root="HKCR" Key="lyouurl" ForceDeleteOnUninstall="yes">
+								<RegistryValue Type="string" Value="URL:lyouurl" />
+								<RegistryValue Type="string" Name="lyou2" Value="222" />
+								<RegistryValue Type="string" Name="URL Procotol" Value="" />
+								<RegistryKey Key="DefaultIcon">
+									<RegistryValue Type="string" Value="Second.exe" />
+								</RegistryKey>
+								<RegistryKey Key="shell\open\command" >
+									<RegistryValue Type="string" Value="&quot;[INSTALLDIR]Second.exe&quot; &quot;%1&quot;" />
+								</RegistryKey>
+							</RegistryKey>
+						</Component>					
+			</DirectoryRef>
+			
+			<Feature Id="Done" ConfigurableDirectory="INSTALLDIR">
+				<ComponentRef Id="Executable" />
+				<ComponentRef Id="Registry" />
+			</Feature>
+			<UIRef Id="WixUI_Mondo" />
+	</Product>
+</Wix>
+candle thiscode.wxs   ----ok
+light -ext WixUIExtension thiscode.wixobj   ----ok
+
+
+--------------------------------------------------------------------------two
+<?xml version="1.0" encoding="utf-8" ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="8A5CB21E-2DE7-4DA8-A991-6FBD9BA2FC01" UpgradeCode="B1BEC438-7FF0-4441-AD81-F032BECD12FF" Name="First Program" Manufacturer="person" Language="1033" Codepage="1252" Version="1.0.0" >
+		<Package Id="*" />
+		<Media Id="1" />
+			<Directory Id="TARGETDIR" Name="SourceDir">
+				<Directory	Id="LocalAppDataFolder"	>
+					<Directory	Id="INSTALLDIR" Name="lyou" >
+						<Component Id="Executable" Guid="30329BFB-5C23-472C-B485-8D8234ABDC0B">
+							<File Id="Second" Name="Second.exe" Source="Second.exe" KeyPath="yes"/>
+						</Component>
+						<Component Id="Registry" Guid="89C3617C-DECA-4333-805F-80A84C6F491C">
+							<RegistryKey Root="HKCU" Key="lyouurl" ForceDeleteOnUninstall="yes">
+								<RegistryValue Type="string" Value="URL:lyouurl" />
+								<RegistryValue Type="string" Name="lyou2" Value="222" />
+								<RegistryValue Type="string" Name="URL Procotol" Value="" />
+								<RegistryKey Key="DefaultIcon">
+									<RegistryValue Type="string" Value="Second.exe" />
+								</RegistryKey>
+								<RegistryKey Key="shell\open\command" >
+									<RegistryValue Type="string" Value="&quot;[INSTALLDIR]Second.exe&quot; &quot;%1&quot;" />
+								</RegistryKey>
+							</RegistryKey>
+						</Component>
+					</Directory>
+				</Directory>				
+			</Directory>
+			<Feature Id="Done" ConfigurableDirectory="INSTALLDIR">
+				<ComponentRef Id="Executable" />
+				<ComponentRef Id="Registry" />
+			</Feature>
+			<UIRef Id="WixUI_Mondo" />
+	</Product>
+</Wix>
+
+candle thiscode.wxs   ----ok
+light -ext WixUIExtension thiscode.wixobj  get this:
+thiscode.wxs(9) : error LGHT0204 : ICE38: Component Executable installs to user profile. It must use a registry key under HKCU as its KeyPath, not a file.
+thiscode.wxs(8) : error LGHT0204 : ICE64: The directory INSTALLDIR is in the user profile but is not listed in the RemoveFile table.
+thiscode.wxs(10) : warning LGHT1076 : ICE91: The file 'Second' will be installed to the per user directory 'INSTALLDIR' that doesn't vary based on ALLUSERS value. This file won't be copied to each user's profile even if a per machine installation is desired.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
